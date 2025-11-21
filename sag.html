@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANNAPURNA - Empowering Farmers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #4CAF50, #8BC34A);
+            color: #333;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://example.com/agriculture-field.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            animation: zoomInOut 10s infinite alternate;
+        }
+        @keyframes zoomInOut {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 3em;
+            color: #2E7D32;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #558B2F;
+            margin: 10px 0;
+        }
+        nav {
+            background: #388E3C;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a, nav button {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        nav a:hover, nav button:hover {
+            background: #4CAF50;
+            border-radius: 5px;
+        }
+        .language-dropdown {
+            display: inline-block;
+        }
+        .language-dropdown select {
+            background: #388E3C;
+            color: white;
+            border: none;
+            padding: 10px;
+        }
+        .search-section {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .dropdown {
+            display: none;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .dropdown div {
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dropdown div:hover {
+            background: #f0f0f0;
+        }
+        .cascading-dropdowns {
+            display: none;
+            margin-top: 10px;
+        }
+        .cascading-dropdowns select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .get-started {
+            text-align: center;
+            margin: 20px;
+        }
+        .get-started button {
+            background: #FF9800;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+        }
+        .get-started button:hover {
+            background: #F57C00;
+        }
+        .login-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .login-section h2 {
+            text-align: center;
+            color: #2E7D32;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .back-btn {
+            background: #f44336;
+            margin-top: 10px;
+        }
+        .back-btn:hover {
+            background: #d32f2f;
+        }
+        .otp-section {
+            display: none;
+        }
+        .register-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <header>
+        <h1>ANNAPURNA</h1>
+        <p>Empowering farmers with smart technology for better yields, sustainable practices, and prosperous futures</p>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#weather">Weather</a>
+        <a href="#soil">Soil Analysis</a>
+        <a href="#crops">Crops Markets</a>
+        <a href="#store">Store</a>
+        <a href="#reviews">Reviews</a>
+        <div class="language-dropdown">
+            <select id="language">
+                <option value="english">English</option>
+                <option value="kannada">Kannada</option>
+            </select>
+        </div>
+        <button id="login-btn">Login</button>
+    </nav>
+    <div class="search-section">
+        <input type="text" class="search-bar" id="search" placeholder="Search districts, taluks, villages...">
+        <div class="dropdown" id="dropdown">
+            <div>District: Bangalore Rural</div>
+            <div>District: Mysore</div>
+            <div>District: Dharwad</div>
+            <!-- Add more districts as needed -->
+        </div>
+        <div class="cascading-dropdowns" id="cascading">
+            <select id="district-select">
+                <option value="">Select District</option>
+                <option value="bangalore-rural">Bangalore Rural</option>
+                <option value="mysore">Mysore</option>
+                <option value="dharwad">Dharwad</option>
+            </select>
+            <select id="taluk-select" style="display: none;">
+                <option value="">Select Taluk</option>
+            </select>
+            <select id="village-select" style="display: none;">
+                <option value="">Select Village</option>
+            </select>
+        </div>
+    </div>
+    <div class="get-started">
+        <button>Get Started</button>
+    </div>
+    <div class="login-section" id="login-section">
+        <h2>Login</h2>
+        <div id="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" required>
+            </div>
+            <button class="btn" id="send-otp">Send OTP</button>
+            <button class="btn back-btn" id="back-to-main">Back</button>
+        </div>
+        <div id="otp-section" class="otp-section">
+            <div class="form-group">
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" required>
+            </div>
+            <button class="btn" id="verify-otp">Verify OTP</button>
+            <button class="btn back-btn" onclick="showLoginForm()">Back</button>
+        </div>
+        <div id="register-section" class="register-section">
+            <h2>Register</h2>
+            <p>Registration successful! Welcome to ANNAPURNA.</p>
+            <button class="btn back-btn" onclick="showLoginForm()">Back to Login</button>
+        </div>
+    </div>
+
+    <script>
+        // Language switch (basic alert for demo)
+        document.getElementById('language').addEventListener('change', function() {
+            alert('Language switched to ' + this.value);
+        });
+
+        // Search dropdown (initial districts)
+        const search = document.getElementById('search');
+        const dropdown = document.getElementById('dropdown');
+        const cascading = document.getElementById('cascading');
+        search.addEventListener('focus', () => {
+            dropdown.style.display = 'block';
+        });
+        search.addEventListener('blur', () => {
+            setTimeout(() => dropdown.style.display = 'none', 200);
+        });
+        dropdown.addEventListener('click', (e) => {
+            if (e.target.tagName === 'DIV') {
+                search.value = e.target.textContent;
+                dropdown.style.display = 'none';
+                cascading.style.display = 'block'; // Show cascading dropdowns
+            }
+        });
+
+        // Cascading dropdowns data (sample for Karnataka)
+        const data = {
+            'bangalore-rural': {
+                taluks: ['Hoskote', 'Nelamangala'],
+                villages: {
+                    'Hoskote': ['Doddaballapur', 'Sarjapur'],
+                    'Nelamangala': ['Magadi', 'Ramanagara']
+                }
+            },
+            'mysore': {
+                taluks: ['Nanjangud', 'Hunsur'],
+                villages: {
+                    'Nanjangud': ['Chamrajnagar', 'Kollegal'],
+                    'Hunsur': ['Krishnarajpet', 'Mandya']
+                }
+            },
+            'dharwad': {
+                taluks: ['Hubli', 'Gadag'],
+                villages: {
+                    'Hubli': ['Kalghatgi', 'Navalgund'],
+                    'Gadag': ['Ron', 'Shirhatti']
+                }
+            }
+        };
+
+        const districtSelect = document.getElementById('district-select');
+        const talukSelect = document.getElementById('taluk-select');
+        const villageSelect = document.getElementById('village-select');
+
+        districtSelect.addEventListener('change', function() {
+            const district = this.value;
+            talukSelect.innerHTML = '<option value="">Select Taluk</option>';
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            if (district && data[district]) {
+                data[district].taluks.forEach(taluk => {
+                    talukSelect.innerHTML += `<option value="${taluk}">${taluk}</option>`;
+                });
+                talukSelect.style.display = 'block';
+                villageSelect.style.display = 'none';
+            } else {
+                talukSelect.style.display = 'none';
+                villageSelect.style.display = 'none';
+            }
+        });
+
+        talukSelect.addEventListener('change', function() {
+            const district = districtSelect.value;
+            const taluk = this.value;
+            villageSelect.innerHTML = '<option value="">Select Village</option>';
+            if (taluk && data[district] && data[district].villages[taluk]) {
+                data[district].villages[taluk].forEach(village => {
+                    villageSelect.innerHTML += `<option value="${village}">${village}</option>`;
+                });
+                villageSelect.style.display = 'block';
+            } else {
+                villageSelect.style.display = 'none';
+            }
+        });
+
+        // Login toggle
+        const loginBtn = document.getElementById('login-btn');
+        const loginSection = document.getElementById('login-section');
+        loginBtn.addEventListener('click', () => {
+            loginSection.style.display = 'block';
+        });
+
+        // Back to main
+        document.getElementById('back-to-main').addEventListener('click', () => {
+            loginSection.style.display = 'none';
+        });
+
+        // OTP flow
+        document.getElementById('send-otp').addEventListener('click', () => {
+            // Simulate OTP send (replace with real API)
+            alert('OTP sent to your phone/email!');
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('otp-section').style.display = 'block';
+        });
+
+        document.getElementById('verify-otp').addEventListener('click', () => {
+            // Simulate verification
+            alert('OTP verified!');
+            document.getElementById('otp-section').style.display = 'none';
+            document.getElementById('register-section').style.display = 'block';
+        });
+
+        function showLoginForm() {
+            document.getElementById('otp-section').style.display = 'none';
+            document.getElementById('register-section').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
