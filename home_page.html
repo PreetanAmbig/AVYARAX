@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+     <!-- GOOGLE STYLE HEADER -->
+    <header class="header">
+        <div class="logo-area">
+            <img src="home_page/icons/logo.jpeg" alt="logo" class="google-icon">
+        </div>
+
+        <div class="search-container">
+            <form class="search-bar">
+                <div id="searchResult" style="margin-top:20px; font-size:20px; font-weight:600;">
+            </div>
+
+                <input class="input"  placeholder="Search anything..." id="searchInput">
+                <button class="but"><img src="home_page/icons/serch.svg" alt="serch" class="serch"></button>
+            </form>
+        </div>
+
+        <div class="user-actions">
+            <a class="log" href="home_page/icons/login and registration/login-registration.html">login</a>
+            <a class="register-btn" href="home_page/icons/login and registration/login-registration.html">register</a>
+            <a href="profile-pic.html">
+                <img src="home_page/icons/account.svg" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <div class="page-offset"></div>
+
+    <!-- QUICK ACCESS -->
+    <section class="section" id="quick-access">
+        <h1>Quick Access</h1>
+        <p class="subtitle">Everything you need for successful farming</p>
+
+        <div class="features-grid">
+
+            <a href="weather_page.html" class="feature-card" >
+                <div class="icon-container icon-weather" >
+                    <img src="home_page/icons/cloud.svg" alt="cloud">
+                </div>
+                <h3>Weather</h3>
+                <p>Check forecast</p>
+            </a>
+
+            <a href="soil-scanner.html" class="feature-card">
+                <div class="icon-container icon-soil">
+                    <img src="home_page/icons/crop.svg" alt="scanner">
+                </div>
+                <h3>Soil Scanner</h3>
+                <p>Scan & analyze soil</p>
+            </a>
+
+            <a href="crop-scanner.html" class="feature-card">
+                <div class="icon-container icon-crop">
+                    <img src="home_page/icons/food.svg" alt="food">
+                </div>
+                <h3>Crop Scanner</h3>
+                <p>Detect & identify crops</p>
+            </a>
+
+            <a href="market.html" class="feature-card">
+                <div class="icon-container icon-market">
+                    <img src="home_page/icons/rupee.svg" alt="market">
+                </div>
+                <h3>Market Rates</h3>
+                <p>View prices</p>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- FEATURES THAT HELP YOU GROW -->
+    <section class="section">
+        <h2>Features That Help You Grow</h2>
+
+        <div class="features-grid">
+
+            <a href="forecast.html" class="feature-card">
+                <div class="icon-container icon-forecasts">
+                  <img src="home_page/icons/weather.svg" alt="icon">   
+                </div>
+                <h3>Weather Forecasts</h3>
+                <p>Real-time weather updates</p>
+            </a>
+
+            <a href="analysis.html" class="feature-card">
+                <div class="icon-container icon-analysis">
+                    <img src="home_page/icons/tips.svg" alt="tip">
+                </div>
+                <h3>Soil Analysis</h3>
+                <p>Understand your soil</p>
+            </a>
+
+            <a href="trends.html" class="feature-card">
+                <div class="icon-container icon-trends">
+                    <img src="home_page/icons/trend.svg" alt="trend">
+                </div>
+                <h3>Market Trends</h3>
+                <p>Current crop trends</p>
+            </a>
+
+            <a href="tips.html" class="feature-card">
+                <div class="icon-container icon-tips">
+                    <img src="home_page/icons/smart.svg" alt="smart">
+                </div>
+                <h3>Smart Tips</h3>
+                <p>Personalized farming advice</p>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- SLIDE ANIMATION SCRIPT -->
+    <script>
+        const sections = document.querySelectorAll('.section');
+        function reveal() {
+            sections.forEach(s => {
+                if (s.getBoundingClientRect().top < window.innerHeight - 50) {
+                    s.classList.add("visible");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+document.getElementById("searchInput").addEventListener("keyup", function (event) {
+    let value = event.target.value;
+
+    if (value.trim() === "") {
+        document.getElementById("searchResult").innerHTML = "";
+    } else {
+        document.getElementById("searchResult").innerHTML = value;
+    }
+});
+
+</body>
+</html>
