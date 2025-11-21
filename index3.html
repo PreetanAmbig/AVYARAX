@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech Solutions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ---------------- GLOBAL RESET ---------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* ---------------- HEADER ---------------- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 40px;
+        }
+         /* ---------------- GOOGLE STYLE FIXED HEADER ---------------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999; /* Always on top */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 25px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Space below header so content doesn't hide */
+.page-offset {
+    height: 90px; /* Adjust for header height */
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.google-icon {
+    width: 32px;
+    height: 32px;
+}
+/* ---------------- GOOGLE STYLE FIXED HEADER ---------------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999; /* Always on top */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 25px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Space below header so content doesn't hide */
+.page-offset {
+    height: 90px; /* Adjust for header height */
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.google-icon {
+    width: 32px;
+    height: 32px;
+}
+
+.search-container {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar {
+    width: 100%;
+    max-width: 650px; /* Google style wide bar */
+    display: flex;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    background: #f8f9fa;
+    overflow: hidden;
+    padding-left: 10px;
+    transition: 0.2s ease;
+}
+
+.search-bar:hover {
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    outline: none;
+    background: transparent;
+}
+
+.search-bar button {
+    background-color: #228B22;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.user-actions {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+
+ 
+
+
+
+        /* ---------------- SLIDE SECTIONS ---------------- */
+        .section, .main-content {
+            padding: 70px 20px;
+            background: rgba(255,255,255,0.85);
+            margin: 40px auto;
+            border-radius: 12px;
+            max-width: 1200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            /* SLIDE ANIMATION */
+            opacity: 0;
+            transform: translateY(60px);
+            transition: 1s all ease;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #7f8c8d;
+        }
+
+        /* ---------------- FEATURE GRID ---------------- */
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            width: 260px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-weather { background: #e3f2fd; }
+        .icon-soil { background: #f3e5f5; }
+        .icon-crop { background: #e8f5e9; }
+        .icon-market { background: #fff3e0; }
+        .icon-forecasts { background: #e1f5fe; }
+        .icon-analysis { background: #fce4ec; }
+        .icon-trends { background: #e0f2f1; }
+        .icon-tips { background: #fff9c4; }
+
+        svg { width: 35px; fill: #555; }
+
+        /* RESPONSIVE */
+        @media(max-width: 768px) {
+            .header { flex-direction: column; gap: 20px; }
+            .search-container { order: 2; width: 100%; }
+            .user-actions { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo-area">
+        <!-- Google "G" Icon -->
+        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg">
+        
+        <!-- Your Logo -->
+        <a href="#">
+            <img class="logo" src="https://i.ibb.co/6PJCf3P/logo-placeholder.png" alt="Site Logo">
+        </a>
+    </div>
+
+    <div class="search-container">
+        <form class="search-bar" action="#">
+            <input type="text" placeholder="Search anything...">
+            <button>Search</button>
+        </form>
+    </div>
+
+    <div class="user-actions">
+        <a class="log" href="#">Login</a>
+        <a class="register-btn" href="#">Register</a>
+        <img src="https://i.ibb.co/LQk0pJF/profile-pic-placeholder.png" class="profile-pic">
+    </div>
+
+</header>
+
+<!-- Offset so your content does not hide behind fixed header -->
+<div class="page-offset"></div>
+
+
+    <!-- ⭐ WELCOME SECTION (Added Back as Requested) -->
+    <main class="main-content section">
+        <h1>Welcome to Our Website!</h1>
+        <p>This page now features a beautiful background image related to agriculture and tradition.</p>
+        <p>The content is placed in a semi-transparent box to ensure it remains easy to read.</p>
+    </main>
+
+    <!-- QUICK ACCESS -->
+    <section class="section" id="quick-access">
+        <h1>Quick Access</h1>
+        <p class="subtitle">Everything you need for successful farming</p>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="icon-container icon-weather"></div>
+                <h3>Weather</h3>
+                <p>Check forecast</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-soil"></div>
+                <h3>Soil Scanner</h3>
+                <p>Scan & analyze soil</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-crop"></div>
+                <h3>Crop Scanner</h3>
+                <p>Detect & identify crops</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-market"></div>
+                <h3>Market Rates</h3>
+                <p>View prices</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="section" id="features-grow">
+        <h2>Features That Help You Grow</h2>
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="icon-container icon-forecasts"></div>
+                <h3>Weather Forecasts</h3>
+                <p>Real-time updates</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-analysis"></div>
+                <h3>Soil Analysis</h3>
+                <p>Understand your soil</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-trends"></div>
+                <h3>Market Rates</h3>
+                <p>Current trends</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container icon-tips"></div>
+                <h3>Smart Tips</h3>
+                <p>Personalized farming advice</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SLIDE IN SCRIPT -->
+    <script>
+        const sections = document.querySelectorAll('.section');
+
+        function reveal() {
+            sections.forEach(sec => {
+                const top = sec.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) {
+                    sec.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+    </script>
+
+</body>
+</html>

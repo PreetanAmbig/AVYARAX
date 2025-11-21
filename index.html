@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Web Page</title>
+    <style>
+        /* --- Basic Reset & Body Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* --- Header Layout --- */
+        .header {
+            display: flex;
+            justify-content: space-between; /* Pushes items to the ends and center */
+            align-items: center; /* Vertically aligns all items in the header */
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+        }
+
+        /* --- Left Corner: Logo --- */
+        .logo-container {
+            flex: 1; /* Takes up available space */
+        }
+        .logo {
+            height: 40px; /* Adjust height as needed */
+            width: auto;
+        }
+
+        /* --- Center: Search Bar --- */
+        .search-container {
+            flex: 2; /* Takes up more space */
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 500px; /* Max width for the search bar */
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            overflow: hidden; /* Ensures the button and input have rounded corners */
+        }
+        .search-bar input {
+            flex-grow: 1; /* Takes up all available space in the container */
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            outline: none; /* Removes the blue outline on focus */
+        }
+        .search-bar button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- Right Corner: Profile & Buttons --- */
+        .user-actions {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px; /* Space between items */
+        }
+        .user-actions a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .user-actions a:hover {
+            background-color: #e9ecef;
+        }
+        .register-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .register-btn:hover {
+            background-color: #218838 !important;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Makes the image circular */
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* --- Responsive Design for Smaller Screens --- */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .logo-container, .search-container, .user-actions {
+                flex: none; /* Reset flex properties */
+                width: 100%;
+                padding: 10px 0;
+                justify-content: center;
+            }
+            .user-actions {
+                order: 3; /* Moves user actions to the bottom on mobile */
+                gap: 20px;
+            }
+            .search-container {
+                order: 2; /* Moves search bar to the middle */
+            }
+            .logo-container {
+                order: 1; /* Keeps logo at the top */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+
+        <!-- Left Corner: Logo -->
+        <div class="logo-container">
+            <a href="#">
+                <!-- Replace with your actual logo image -->
+                <img src="https://i.ibb.co/6PJCf3P/logo-placeholder.png" alt="Company Logo" class="logo">
+            </a>
+        </div>
+
+        <!-- Center: Search Bar -->
+        <div class="search-container">
+            <form class="search-bar" action="/search" method="get">
+                <input type="text" name="query" placeholder="Search for anything...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Right Corner: Profile Pic and Buttons -->
+        <div class="user-actions">
+            <a href="/login">Login</a>
+            <a href="/register" class="register-btn">Register</a>
+            <a href="/profile">
+                <!-- Replace with your actual profile picture -->
+                <img src="https://i.ibb.co/LQk0pJF/profile-pic-placeholder.png" alt="User Profile" class="profile-pic">
+            </a>
+        </div>
+
+    </header>
+
+    <main class="main-content">
+        <h1>Welcome to Our Website!</h1>
+        <p>This is the main content area of your page.</p>
+    </main>
+
+</body>
+</html>

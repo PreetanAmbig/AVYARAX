@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech Solutions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* ---------------- GOOGLE-STYLE FIXED HEADER ---------------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 25px;
+
+            background: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .page-offset {
+            height: 100px; /* Prevent content from hiding behind header */
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 10px;
+        }
+
+        .google-icon {
+            width: 200px;
+        }
+
+        .logo {
+            height: 20px;
+        }
+
+        .search-container {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+
+            border: 1px solid #f3e5f5;
+            border-radius: 50px;
+            background: #ffffff;
+            padding-left: 10px;
+            padding-top: 10px;
+
+            overflow: hidden;
+            transition: 0.2s ease;
+        }
+
+        .search-bar:hover {
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            width: auto;
+            outline: none;
+            background: transparent;
+        }
+
+        .search-bar button {
+            color: white;
+            border: none;
+            cursor: pointer;
+            background-color: #ffffff;
+            margin-top: 0;
+            width: 60px;
+
+        }
+        .serch{
+         margin-top: 1px;
+         margin-bottom:10px ;
+         margin-left: 10px;
+         margin-right: 10px;
+        }
+        .but{
+            padding-top: 1px;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            color: rgb(80, 80, 241);
+            width: auto;
+        }
+       .user-actions a {
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .log:hover,
+        .register-btn:hover {
+            background: #ffffff;
+            padding: 10 10px;
+            text-decoration: underline;
+            color: green;
+            
+        }
+
+        .profile-pic {
+            width: 40px;
+            border-radius: 50%;
+        }
+
+        /* ---------------- SECTIONS WITH SLIDE EFFECT ---------------- */
+        .section {
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.88);
+            margin: 40px auto;
+            border-radius: 12px;
+            max-width: 1200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+            opacity: 0;
+            transform: translateY(60px);
+            transition: 1s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #7f8c8d;
+        }
+
+        /* ---------------- FEATURE GRID ---------------- */
+        .features-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        /* CLICKABLE CARDS */
+        .feature-card {
+            background: white;
+            padding: 30px;
+            width: 260px;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-weather { background: #e3f2fd; }
+        .icon-soil { background: #f3e5f5; }
+        .icon-crop { background: #e8f5e9; }
+        .icon-market { background: #fff3e0; }
+        .icon-forecasts { background: #e1f5fe; }
+        .icon-analysis { background: #fce4ec; }
+        .icon-trends { background: #e0f2f1; }
+        .icon-tips { background: #fff9c4; }
+
+        svg { width: 35px; }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- GOOGLE STYLE HEADER -->
+    <header class="header">
+        <div class="logo-area">
+            <img src="logo.jpeg" alt="logo" class="google-icon">
+        </div>
+
+        <div class="search-container">
+            <form class="search-bar">
+                <input class="input" type="text" placeholder="Search anything...">
+                <button class="but"><img src="serch.svg" alt="serch" class="serch"></button>
+            </form>
+        </div>
+
+        <div class="user-actions">
+            <a class="log" href="login.html">login</a>
+            <a class="register-btn" href="register.html">register</a>
+            <a href="profile.html">
+                <img src="account.svg" class="profile-pic">
+            </a>
+        </div>
+    </header>
+
+    <div class="page-offset"></div>
+
+    <!-- QUICK ACCESS -->
+    <section class="section" id="quick-access">
+        <h1>Quick Access</h1>
+        <p class="subtitle">Everything you need for successful farming</p>
+
+        <div class="features-grid">
+
+            <a href="weather.html" class="feature-card" >
+                <div class="icon-container icon-weather" >
+                    <img src="cloud.svg" alt="cloud">
+                </div>
+                <h3>Weather</h3>
+                <p>Check forecast</p>
+            </a>
+
+            <a href="soil-scanner.html" class="feature-card">
+                <div class="icon-container icon-soil">
+                    <img src="crop.svg" alt="scanner">
+                </div>
+                <h3>Soil Scanner</h3>
+                <p>Scan & analyze soil</p>
+            </a>
+
+            <a href="crop-scanner.html" class="feature-card">
+                <div class="icon-container icon-crop">
+                    <img src="food.svg" alt="food">
+                </div>
+                <h3>Crop Scanner</h3>
+                <p>Detect & identify crops</p>
+            </a>
+
+            <a href="market.html" class="feature-card">
+                <div class="icon-container icon-market">
+                    <img src="rupee.svg" alt="market">
+                </div>
+                <h3>Market Rates</h3>
+                <p>View prices</p>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- FEATURES THAT HELP YOU GROW -->
+    <section class="section">
+        <h2>Features That Help You Grow</h2>
+
+        <div class="features-grid">
+
+            <a href="forecast.html" class="feature-card">
+                <div class="icon-container icon-forecasts">
+                  <img src="weather.svg" alt="icon">   
+                </div>
+                <h3>Weather Forecasts</h3>
+                <p>Real-time weather updates</p>
+            </a>
+
+            <a href="analysis.html" class="feature-card">
+                <div class="icon-container icon-analysis">
+                    <img src="tips.svg" alt="tip">
+                </div>
+                <h3>Soil Analysis</h3>
+                <p>Understand your soil</p>
+            </a>
+
+            <a href="trends.html" class="feature-card">
+                <div class="icon-container icon-trends">
+                    <img src="trend.svg" alt="trend">
+                </div>
+                <h3>Market Trends</h3>
+                <p>Current crop trends</p>
+            </a>
+
+            <a href="tips.html" class="feature-card">
+                <div class="icon-container icon-tips">
+                    <img src="smart.svg" alt="smart">
+                </div>
+                <h3>Smart Tips</h3>
+                <p>Personalized farming advice</p>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- SLIDE ANIMATION SCRIPT -->
+    <script>
+        const sections = document.querySelectorAll('.section');
+        function reveal() {
+            sections.forEach(s => {
+                if (s.getBoundingClientRect().top < window.innerHeight - 100) {
+                    s.classList.add("visible");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+</html>

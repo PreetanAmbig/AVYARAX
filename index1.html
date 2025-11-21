@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Web Page</title>
+    <style>
+        /* --- Basic Reset & Body Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+
+            /* --- BACKGROUND IMAGE STYLES --- */
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;       /* Scales the image to cover the entire page */
+            background-position: center;   /* Centers the image */
+            background-repeat: no-repeat;  /* Prevents the image from repeating */
+            background-attachment: fixed; /* Creates a parallax effect (image stays fixed while scrolling) */
+            min-height: 100vh;             /* Ensures the background covers the full screen height */
+        }
+
+        /* --- Header Layout --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 25px;
+            /* Semi-transparent white background for readability over the image */
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+        }
+
+        /* --- Left Corner: Logo --- */
+        .logo-container {
+            flex: 1;
+        }
+        .logo {
+            height: 40px;
+            width: auto;
+        }
+
+        /* --- Center: Search Bar --- */
+        .search-container {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            padding: 20 20px;
+        }
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-bar button {
+            background-color: #228B22;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #e9ecef;;
+            color: #228B22;
+        }
+
+        /* --- Right Corner: Profile & Buttons --- */
+        .user-actions {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-actions a {
+            text-decoration: none;
+            color: #ffffff;
+            border-color: #228B22;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .user-actions a:hover {
+            background-color: #ffffff;
+            color:  #228B22;
+
+        }
+        .register-btn,.log {
+            background-color: #228B22;
+            color: white;
+        }
+        .register-btn:hover {
+            background-color:#e9ecef;
+            color:  #228B22;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            padding: 40px;
+            text-align: center;
+            max-width: 800px;
+            margin: 40px auto; /* This centers the content box horizontally */
+            /* Semi-transparent white background for readability */
+            background-color: #ffffff;
+            border-radius: 10px; /* Rounded corners for a modern look */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* --- Responsive Design for Smaller Screens --- */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .logo-container, .search-container, .user-actions {
+                flex: none;
+                width: 100%;
+                padding: 10px 0;
+                justify-content: center;
+            }
+            .user-actions {
+                order: 3;
+                gap: 20px;
+            }
+            .search-container {
+                order: 2;
+            }
+            .logo-container {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+
+        <!-- Left Corner: Logo -->
+        <div class="logo-container">
+            <a href="#">
+                <img src="https://i.ibb.co/6PJCf3P/logo-placeholder.png" alt="Company Logo" class="logo">
+            </a>
+        </div>
+
+        <!-- Center: Search Bar -->
+        <div class="search-container">
+            <form class="search-bar" action="/search" method="get">
+                <input type="text" name="query" placeholder="Search for anything...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Right Corner: Profile Pic and Buttons -->
+        <div class="user-actions">
+            <a class="log" href="/login">Login</a>
+            <a href="/register" class="register-btn">Register</a>
+            <a href="/profile">
+                <img src="https://i.ibb.co/LQk0pJF/profile-pic-placeholder.png" alt="User Profile" class="profile-pic">
+            </a>
+        </div>
+
+    </header>
+
+    <main class="main-content">
+        <h1>Welcome to Our Website!</h1>
+        <p>This page now features a beautiful background image related to agriculture and tradition.</p>
+        <p>The content is placed in a semi-transparent box to ensure it remains easy to read.</p>
+    </main>
+
+</body>
+</html>

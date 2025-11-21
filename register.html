@@ -1,0 +1,814 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANNAPURNA - Login & Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .website-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            border-bottom-color: #4CAF50;
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #4CAF50;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3d8b40;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #555;
+        }
+
+        .form-footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* OTP Verification */
+        .otp-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .otp-input:focus {
+            border-color: #4CAF50;
+        }
+
+        .resend-otp {
+            text-align: center;
+            margin-top: 1rem;
+            color: #555;
+        }
+
+        .resend-otp button {
+            background: none;
+            border: none;
+            color: #4CAF50;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .resend-otp button:hover {
+            text-decoration: underline;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.active {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background-color: #4CAF50;
+        }
+
+        .toast.error {
+            background-color: #f44336;
+        }
+
+        /* Password Strength Indicator */
+        .password-strength {
+            height: 5px;
+            margin-top: 5px;
+            border-radius: 5px;
+            background-color: #eee;
+        }
+
+        .password-strength-meter {
+            height: 100%;
+            width: 0;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+
+        .password-strength-meter.weak {
+            width: 33%;
+            background-color: #f44336;
+        }
+
+        .password-strength-meter.medium {
+            width: 66%;
+            background-color: #FF9800;
+        }
+
+        .password-strength-meter.strong {
+            width: 100%;
+            background-color: #4CAF50;
+        }
+
+        /* Timer for OTP Resend */
+        .otp-timer {
+            text-align: center;
+            margin-top: 0.5rem;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .website-name {
+                font-size: 1.8rem;
+            }
+
+            .tagline {
+                font-size: 0.9rem;
+            }
+
+            .otp-container {
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1 class="website-name">ANNAPURNA</h1>
+            <p class="tagline">Empowering farmers with smart technology</p>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" id="loginTab">Login</div>
+            <div class="auth-tab" id="registerTab">Register</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" required>
+                <div class="error-message" id="loginUsernameError">Please enter your username</div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+                <div class="error-message" id="loginPasswordError">Please enter your password</div>
+            </div>
+            <button type="submit" class="submit-btn">Login</button>
+            <div class="form-footer">
+                <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+            </div>
+            <div class="form-footer">
+                Don't have an account? <a href="#" id="showRegisterLink">Register</a>
+            </div>
+        </form>
+
+        <!-- Registration Form -->
+        <form id="registerForm" class="auth-form">
+            <div class="form-group">
+                <label for="registerUsername">Username</label>
+                <input type="text" id="registerUsername" required>
+                <div class="error-message" id="registerUsernameError">Username must be at least 3 characters</div>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email ID</label>
+                <input type="email" id="registerEmail" required>
+                <div class="error-message" id="registerEmailError">Please enter a valid email</div>
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Phone Number</label>
+                <input type="tel" id="registerPhone" required>
+                <div class="error-message" id="registerPhoneError">Please enter a valid 10-digit phone number</div>
+            </div>
+            <div class="form-group">
+                <label for="registerPassword">Password</label>
+                <input type="password" id="registerPassword" required>
+                <div class="password-strength">
+                    <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                </div>
+                <div class="error-message" id="registerPasswordError">Password must be at least 6 characters</div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+                <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+            </div>
+            <button type="submit" class="submit-btn">Register</button>
+            <div class="form-footer">
+                Already have an account? <a href="#" id="showLoginLink">Login</a>
+            </div>
+        </form>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotPasswordForm" class="auth-form">
+            <div class="form-group">
+                <label for="forgotEmail">Email ID</label>
+                <input type="email" id="forgotEmail" required>
+                <div class="error-message" id="forgotEmailError">Please enter a valid email</div>
+            </div>
+            <button type="submit" class="submit-btn">Send OTP</button>
+            <div class="form-footer">
+                Remember your password? <a href="#" id="showLoginFromForgotLink">Login</a>
+            </div>
+        </form>
+
+        <!-- OTP Verification Form -->
+        <form id="otpForm" class="auth-form">
+            <h2 class="form-title">Verify Your Phone Number</h2>
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #555;">
+                We've sent a 6-digit OTP to your registered phone number
+            </p>
+            <div class="otp-container">
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+                <input type="text" class="otp-input" maxlength="1" required>
+            </div>
+            <button type="submit" class="submit-btn">Verify OTP</button>
+            <div class="resend-otp">
+                Didn't receive the OTP? <button id="resendOtpBtn">Resend OTP</button>
+            </div>
+            <div class="otp-timer" id="otpTimer"></div>
+        </form>
+
+        <!-- Reset Password Form -->
+        <form id="resetPasswordForm" class="auth-form">
+            <h2 class="form-title">Reset Your Password</h2>
+            <div class="form-group">
+                <label for="resetPassword">New Password</label>
+                <input type="password" id="resetPassword" required>
+                <div class="password-strength">
+                    <div class="password-strength-meter" id="resetPasswordStrengthMeter"></div>
+                </div>
+                <div class="error-message" id="resetPasswordError">Password must be at least 6 characters</div>
+            </div>
+            <div class="form-group">
+                <label for="confirmResetPassword">Confirm New Password</label>
+                <input type="password" id="confirmResetPassword" required>
+                <div class="error-message" id="confirmResetPasswordError">Passwords do not match</div>
+            </div>
+            <button type="submit" class="submit-btn">Reset Password</button>
+        </form>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // DOM Elements
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+        const otpForm = document.getElementById('otpForm');
+        const resetPasswordForm = document.getElementById('resetPasswordForm');
+        const showRegisterLink = document.getElementById('showRegisterLink');
+        const showLoginLink = document.getElementById('showLoginLink');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const showLoginFromForgotLink = document.getElementById('showLoginFromForgotLink');
+        const resendOtpBtn = document.getElementById('resendOtpBtn');
+        const otpTimer = document.getElementById('otpTimer');
+        const toast = document.getElementById('toast');
+        
+        // Password strength meters
+        const passwordStrengthMeter = document.getElementById('passwordStrengthMeter');
+        const resetPasswordStrengthMeter = document.getElementById('resetPasswordStrengthMeter');
+        
+        // OTP timer variables
+        let countdown;
+        let timerSeconds = 60;
+        
+        // Current OTP context (registration or password reset)
+        let otpContext = 'registration';
+
+        // Tab Switching
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+            forgotPasswordForm.classList.remove('active');
+            otpForm.classList.remove('active');
+            resetPasswordForm.classList.remove('active');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+            forgotPasswordForm.classList.remove('active');
+            otpForm.classList.remove('active');
+            resetPasswordForm.classList.remove('active');
+        });
+
+        showRegisterLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerTab.click();
+        });
+
+        showLoginLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginTab.click();
+        });
+
+        forgotPasswordLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.classList.remove('active');
+            forgotPasswordForm.classList.add('active');
+        });
+
+        showLoginFromForgotLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginTab.click();
+        });
+
+        // Form Validation
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        function validatePhone(phone) {
+            const re = /^[0-9]{10}$/;
+            return re.test(phone);
+        }
+
+        // Password Strength Checker
+        function checkPasswordStrength(password, meterElement) {
+            let strength = 0;
+            
+            // Reset meter
+            meterElement.className = 'password-strength-meter';
+            
+            if (password.length >= 6) {
+                strength += 1;
+            }
+            
+            if (password.match(/[a-z]+/)) {
+                strength += 1;
+            }
+            
+            if (password.match(/[A-Z]+/)) {
+                strength += 1;
+            }
+            
+            if (password.match(/[0-9]+/)) {
+                strength += 1;
+            }
+            
+            if (password.match(/[$@#&!]+/)) {
+                strength += 1;
+            }
+            
+            // Update meter based on strength
+            if (strength <= 2) {
+                meterElement.classList.add('weak');
+            } else if (strength === 3 || strength === 4) {
+                meterElement.classList.add('medium');
+            } else {
+                meterElement.classList.add('strong');
+            }
+            
+            return strength;
+        }
+
+        // Add password strength checking to registration form
+        document.getElementById('registerPassword').addEventListener('input', (e) => {
+            checkPasswordStrength(e.target.value, passwordStrengthMeter);
+        });
+
+        // Add password strength checking to reset password form
+        document.getElementById('resetPassword').addEventListener('input', (e) => {
+            checkPasswordStrength(e.target.value, resetPasswordStrengthMeter);
+        });
+
+        // OTP Timer Function
+        function startOtpTimer() {
+            clearInterval(countdown);
+            timerSeconds = 60;
+            resendOtpBtn.disabled = true;
+            
+            countdown = setInterval(() => {
+                timerSeconds--;
+                otpTimer.textContent = `Resend OTP in ${timerSeconds} seconds`;
+                
+                if (timerSeconds <= 0) {
+                    clearInterval(countdown);
+                    otpTimer.textContent = '';
+                    resendOtpBtn.disabled = false;
+                }
+            }, 1000);
+        }
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            let isValid = true;
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+            
+            if (!username) {
+                document.getElementById('loginUsernameError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (!password) {
+                document.getElementById('loginPasswordError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // In a real application, you would send a request to the server
+                // For demonstration, we'll just show a success message
+                showToast('Login successful! Redirecting to dashboard...', 'success');
+                
+                // Reset form
+                loginForm.reset();
+            }
+        });
+
+        // Registration Form Submission
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            let isValid = true;
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+            
+            if (username.length < 3) {
+                document.getElementById('registerUsernameError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (!validateEmail(email)) {
+                document.getElementById('registerEmailError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (!validatePhone(phone)) {
+                document.getElementById('registerPhoneError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (password.length < 6) {
+                document.getElementById('registerPasswordError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Store user data for OTP verification
+                localStorage.setItem('userPhone', phone);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('userPassword', password);
+                
+                // Set OTP context to registration
+                otpContext = 'registration';
+                
+                // Show OTP form
+                registerForm.classList.remove('active');
+                otpForm.classList.add('active');
+                
+                // In a real application, you would send an OTP to the user's phone
+                // For demonstration, we'll just show a message
+                showToast(`OTP sent to ${phone}`, 'success');
+                
+                // Start OTP timer
+                startOtpTimer();
+                
+                // Reset form
+                registerForm.reset();
+                passwordStrengthMeter.className = 'password-strength-meter';
+            }
+        });
+
+        // Forgot Password Form Submission
+        forgotPasswordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('forgotEmail').value;
+            
+            let isValid = true;
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+            
+            if (!validateEmail(email)) {
+                document.getElementById('forgotEmailError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // Store email for password reset
+                localStorage.setItem('resetEmail', email);
+                
+                // Set OTP context to password reset
+                otpContext = 'password_reset';
+                
+                // Show OTP form
+                forgotPasswordForm.classList.remove('active');
+                otpForm.classList.add('active');
+                
+                // In a real application, you would send an OTP to the user's email/phone
+                // For demonstration, we'll just show a message
+                showToast(`OTP sent to ${email}`, 'success');
+                
+                // Start OTP timer
+                startOtpTimer();
+                
+                // Reset form
+                forgotPasswordForm.reset();
+            }
+        });
+
+        // OTP Form Submission
+        otpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Collect OTP from all inputs
+            const otpInputs = document.querySelectorAll('.otp-input');
+            let otp = '';
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+            
+            // In a real application, you would verify the OTP with the server
+            // For demonstration, we'll accept any 6-digit OTP
+            if (otp.length === 6) {
+                if (otpContext === 'registration') {
+                    showToast('OTP verified successfully! Your account has been created.', 'success');
+                    
+                    // Clear OTP timer
+                    clearInterval(countdown);
+                    otpTimer.textContent = '';
+                    
+                    // Reset OTP inputs
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                    });
+                    
+                    // Switch to login tab
+                    loginTab.click();
+                } else if (otpContext === 'password_reset') {
+                    showToast('OTP verified! Please set your new password.', 'success');
+                    
+                    // Clear OTP timer
+                    clearInterval(countdown);
+                    otpTimer.textContent = '';
+                    
+                    // Reset OTP inputs
+                    otpInputs.forEach(input => {
+                        input.value = '';
+                    });
+                    
+                    // Show reset password form
+                    otpForm.classList.remove('active');
+                    resetPasswordForm.classList.add('active');
+                }
+            } else {
+                showToast('Please enter a valid 6-digit OTP', 'error');
+            }
+        });
+
+        // Reset Password Form Submission
+        resetPasswordForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const password = document.getElementById('resetPassword').value;
+            const confirmPassword = document.getElementById('confirmResetPassword').value;
+            
+            let isValid = true;
+            
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+            
+            if (password.length < 6) {
+                document.getElementById('resetPasswordError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (password !== confirmPassword) {
+                document.getElementById('confirmResetPasswordError').classList.add('active');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                // In a real application, you would send the new password to the server
+                // For demonstration, we'll just show a success message
+                showToast('Password reset successful! Please login with your new password.', 'success');
+                
+                // Reset form
+                resetPasswordForm.reset();
+                resetPasswordStrengthMeter.className = 'password-strength-meter';
+                
+                // Switch to login tab
+                loginTab.click();
+            }
+        });
+
+        // Resend OTP
+        resendOtpBtn.addEventListener('click', () => {
+            let contactInfo;
+            
+            if (otpContext === 'registration') {
+                contactInfo = localStorage.getItem('userPhone');
+            } else if (otpContext === 'password_reset') {
+                contactInfo = localStorage.getItem('resetEmail');
+            }
+            
+            // In a real application, you would resend the OTP to the user's phone/email
+            // For demonstration, we'll just show a message
+            showToast(`OTP resent to ${contactInfo}`, 'success');
+            
+            // Start OTP timer
+            startOtpTimer();
+        });
+
+        // OTP Input Navigation
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    if (index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                }
+            });
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Toast Notification Function
+        function showToast(message, type = 'success') {
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('active');
+            
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
