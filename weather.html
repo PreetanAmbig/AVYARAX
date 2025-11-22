@@ -3,231 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annapurna - Weather Forecast</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Simple Weather App</title>
 
     <style>
-        :root {
-            --soft-beige: #f9f7f2;
-            --fresh-green: #4CAF50;
-            --dark-green: #2e7d32;
-            --white: #ffffff;
-            --dark-text: #333;
-            --light-text: #6c757d;
-            --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--soft-beige);
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-text);
-        }
-
-        /* Fade-in animation */
-        .fade-in {
-            opacity: 0;
-            animation: fade 1s ease forwards;
-        }
-
-        @keyframes fade {
-            to { opacity: 1; }
-        }
-
-        /* Navbar */
-        .navbar {
-            width: 100%;
-            background: var(--white);
-            padding: 15px 35px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 1.7rem;
-            font-weight: 700;
-            color: var(--fresh-green);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-weight: 500;
-            color: var(--dark-text);
-            font-size: 0.95rem;
-            transition: 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--fresh-green);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 90px 20px 40px;
-        }
-
-        .hero svg {
-            width: 90px;
-            height: 90px;
-            color: var(--fresh-green);
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--light-text);
-            max-width: 650px;
-            margin: auto;
-        }
-
-        /* Input Card */
-        .weather-input-section {
+            background: #04640e;
+            font-family: Arial, sans-serif;
+            color: white;
             display: flex;
             justify-content: center;
-            padding: 40px 20px 80px;
-        }
-
-        .input-card {
-            background: var(--white);
-            width: 100%;
-            max-width: 580px;
-            padding: 35px 40px;
-            border-radius: 22px;
-            box-shadow: var(--shadow);
-            display: flex;
-            gap: 15px;
             align-items: center;
-            transition: transform 0.3s ease;
+            height: 100vh;
         }
 
-        .input-card:hover {
-            transform: translateY(-4px);
-        }
-
-        .district-input {
-            flex-grow: 1;
-            padding: 15px 18px;
+        .container {
+            background: #1e293b;
+            padding: 25px;
             border-radius: 12px;
-            border: 1px solid #ccc;
-            font-size: 1rem;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 330px;
+        }
+  
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 12px;
             outline: none;
-            transition: 0.3s ease;
         }
 
-        .district-input:focus {
-            border-color: var(--fresh-green);
+        button {
+            padding: 10px 18px;
+            background: #054cf4;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .input-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-.input-icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 25px;
-    opacity: 0.7;
-}
-
-.district-input {
-    padding-left: 50px !important;  /* space for icon */
-}
-
-
-        /* Responsive */
-        @media (max-width: 900px) {
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 15px;
-                justify-content: center;
-                margin-top: 10px;
-            }
+        button:hover {
+            background: #0ea5e9;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-
-            .input-card {
-                flex-direction: column;
-                padding: 25px;
-            }
-
-            .district-input, .check-weather-btn {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .navbar {
-                padding: 12px 20px;
-            }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
         }
     </style>
 </head>
+<a href="register.html" class="home-btn">Return to Home</a>
+
+<style>
+.home-btn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 12px 20px;
+    background: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-bottom-right-radius: 10px;
+    font-weight: bold;
+}
+
+.home-btn:hover {
+    background: #45a049;
+}
+</style>
+
 
 <body>
 
-    <!-- HERO -->
-    <section class="hero fade-in">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.5,20A4.5,4.5 0 0,1 2,15.5 4.5,4.5 0 0,1 6.5,11H17.5A5.5,5.5 0 0,1 23,16.5 5.5,5.5 0 0,1 17.5,22H6.5M6.5,13A2.5,2.5 0 0,0 4,15.5 2.5,2.5 0 0,0 6.5,18H17.5A3.5,3.5 0 0,0 21,14.5 3.5,3.5 0 0,0 17.5,11H9.19L8.41,10.22C8.78,9.89 9,9.4 9,8.85A2,2 0 0,0 7,6.85 2,2 0 0,0 5,8.85C5,9.4 5.22,9.89 5.59,10.22L6.5,13Z"/>
-        </svg>
+    <div class="container">
+        <h1>Weather App</h1>
 
-        <h1>Weather Forecast</h1>
-        <p>Get real-time weather updates and smart crop recommendations for your region.</p>
-    </section>
+        <input type="text" id="city" placeholder="Enter city (e.g., bengaluru)">
+        <button onclick="getWeather()">Get Weather</button>
 
-    <!-- INPUT SECTION -->
-    <section class="weather-input-section fade-in">
-      <div class="input-card">
-
-    <div class="input-wrapper">
-        <img src="/mnt/data/weather_hail_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24.svg"
-             class="input-icon">
-
-        <input type="text" class="district-input" 
-               placeholder="Enter your district (e.g., Bangalore)">
+        <div id="result"></div>
     </div>
 
-    <button class="check-weather-btn">Check Weather</button>
-</div>
+    <script>
+        function getWeather() {
+            const city = document.getElementById("city").value;
 
-    </section>
+            if (city === "") {
+                alert("Please enter a city name");
+                return;
+            }
+
+            const apiUrl = `https://api.weatherapi.com/v1/current.json?key=469669f48c6a4cc8a17174103252111&q=${city}&aqi=yes`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const temp = data.current.temp_c;
+                    const condition = data.current.condition.text;
+                    const icon = data.current.condition.icon;
+
+                    document.getElementById("result").innerHTML = `
+                        <img src="https:${icon}" width="80"><br>
+                        <strong>${data.location.name}, ${data.location.country}</strong><br>
+                        Temperature: <b>${temp}°C</b><br>
+                        Condition: ${condition}
+                    `;
+                })
+                .catch(() => {
+                    document.getElementById("result").innerHTML = `
+                        <p style="color:red;">City not found or API error!</p>
+                    `;
+                });
+        }
+    </script>
 
 </body>
 </html>
